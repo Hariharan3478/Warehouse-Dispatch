@@ -23,7 +23,12 @@ A robust, production-grade Spring Boot backend service designed for automated wa
 
 ---
 
-## Getting Started & Running the Application
+## 📐 System Architecture
+
+The `warehouse-dispatch` application follows a standard **Layered Architecture (MVC / Service-Repository pattern)** built with Spring Boot. It processes incoming REST API requests, executes core freight and dispatch logic, and persists transactions into an in-memory H2 database.
+
+
+### Getting Started & Running the Application
 
 ### Prerequisites
 - Ensure you have **JDK 21** installed on your machine.
