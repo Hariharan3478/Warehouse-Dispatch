@@ -11,6 +11,7 @@ public class AllOrdersRejectedException extends RuntimeException {
     }
 
     public ConsolidationResponse getResponse() {
+
         return response;
     }
 }

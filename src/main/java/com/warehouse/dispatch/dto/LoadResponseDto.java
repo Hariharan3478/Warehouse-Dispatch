@@ -6,11 +6,11 @@ import java.util.List;
 
 public record LoadResponseDto(
         String loadId,
-        String zone,
+        String zoneCode,
         String serviceLevel,
         boolean hazmat,
-        String carrier,
-        BigDecimal chargeableKg,
+        String carrierCode,
+        BigDecimal totalChargeableKg,
         BigDecimal loadCost,
         LocalDate etaDate,
         List<OrderAllocationDto> orders
