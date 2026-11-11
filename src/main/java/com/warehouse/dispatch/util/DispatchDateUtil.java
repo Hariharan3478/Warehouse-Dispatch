@@ -3,6 +3,7 @@ package com.warehouse.dispatch.util;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Set;
@@ -43,12 +44,12 @@ public final class DispatchDateUtil {
      * otherwise dispatchDate.
      */
     public static LocalDate calculateEffectiveDispatchDate(
-            ZonedDateTime requestedAt,
+            OffsetDateTime requestedAt,
             String cutoffTimeStr,
             LocalDate dispatchDate,
             Set<LocalDate> holidays) {
 
-        ZonedDateTime kolkataTime = requestedAt.withZoneSameInstant(KOLKATA_ZONE);
+        ZonedDateTime kolkataTime = requestedAt.atZoneSameInstant(KOLKATA_ZONE);
         LocalTime requestedLocalTime = kolkataTime.toLocalTime();
         LocalTime cutoffTime = LocalTime.parse(cutoffTimeStr);
 
@@ -56,6 +57,17 @@ public final class DispatchDateUtil {
             return getNextBusinessDay(dispatchDate, holidays);
         }
         return dispatchDate;
+    }
+
+    /**
+     * Overload for ZonedDateTime support if needed in tests.
+     */
+    public static LocalDate calculateEffectiveDispatchDate(
+            ZonedDateTime requestedAt,
+            String cutoffTimeStr,
+            LocalDate dispatchDate,
+            Set<LocalDate> holidays) {
+        return calculateEffectiveDispatchDate(requestedAt.toOffsetDateTime(), cutoffTimeStr, dispatchDate, holidays);
     }
 
     /**
